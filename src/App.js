@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { readFile } from './utils/fileUploadUtils';
+import Table from './components/Table';
+import Input from './components/Input/Input';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [pairs, setPairs] = useState(null);
+
+    function handleFileUpload(e) {
+        readFile(e, setPairs);
+    }
+
+    return (
+        <div className="App">
+            <div className="input-wrapper">
+                <Input onChange={handleFileUpload} />
+            </div>
+            <div className="table-wrapper">
+                {pairs ? <Table /> : <p>No Data</p>}
+            </div>
+        </div>
+    );
 }
 
 export default App;
