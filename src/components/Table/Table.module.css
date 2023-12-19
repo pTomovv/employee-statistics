@@ -1,0 +1,31 @@
+table {
+    border-collapse: collapse;
+
+    box-shadow: 0 0 5px #000000;
+    border-radius: 15px;
+    overflow: hidden;
+    background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+        'Lucida Sans', Arial, sans-serif;
+}
+th {
+    font-size: large;
+}
+th {
+    padding: 30px;
+}
+td {
+    text-align: center;
+    padding: 20px;
+}
+tr {
+    border-bottom: 1px solid #7a96d1;
+}
+tbody tr:last-child {
+    border: none;
+}
+.row:hover {
+    background-color: #7a96d1;
+    cursor: pointer;
+}

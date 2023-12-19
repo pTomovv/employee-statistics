@@ -1,0 +1,25 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.closeBtn {
+    background-image: linear-gradient(
+        to bottom right,
+        #e0c3fc 0%,
+        #8ec5fc 100%
+    );
+    border: none;
+    border-radius: 25px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #333333;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px 8px;
+    cursor: pointer;
+    position: absolute;
+    top: 65px;
+    right: 3px;
+}

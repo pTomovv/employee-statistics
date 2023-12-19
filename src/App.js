@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import './App.css';
 import { readFile } from './utils/fileUploadUtils';
-import Table from './components/Table';
+import Table from './components/Table/Table';
 import Input from './components/Input/Input';
+import MiniTable from './components/MiniTable/MiniTable';
 
 function App() {
     const [pairs, setPairs] = useState(null);
+    const [active, setActive] = useState({});
+
+    function rowExpand(info) {
+        setActive({ isActive: true, info: info });
+    }
+    function handleClose() {
+        setActive({});
+    }
 
     function handleFileUpload(e) {
         readFile(e, setPairs);
@@ -13,12 +22,17 @@ function App() {
 
     return (
         <div className="App">
-            <div className="input-wrapper">
-                <Input onChange={handleFileUpload} />
-            </div>
-            <div className="table-wrapper">
-                {pairs ? <Table /> : <p>No Data</p>}
-            </div>
+            <Input onChange={handleFileUpload} />
+            {pairs ? (
+                <Table data={pairs} onClick={rowExpand} />
+            ) : (
+                <p>No Data</p>
+            )}
+            {active.isActive ? (
+                <MiniTable info={active.info} onClose={handleClose} />
+            ) : (
+                <></>
+            )}
         </div>
     );
 }
