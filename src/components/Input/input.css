@@ -16,7 +16,7 @@ label {
 }
 
 label:hover {
-    color: #7a96d1;
-    border: 2px dashed #7a96d1;
+    color: white;
+    border: 2px dashed white;
     box-shadow: 0 0 10px #7a96d1;
 }
