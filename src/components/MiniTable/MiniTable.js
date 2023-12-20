@@ -7,7 +7,7 @@ const MiniTable = ({ info, onClose }) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Project IDs</th>
+                        <th>Project ID</th>
                         <th>Number of days worked on this project</th>
                     </tr>
                 </thead>

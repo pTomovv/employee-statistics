@@ -73,6 +73,14 @@ function createEmpProfiles(data) {
     return epmProfiles;
 }
 
+function createOptions(empProfiles) {
+    const result = [];
+    empProfiles.forEach((employee) => {
+        result.push(employee.id);
+    });
+    return result;
+}
+
 function findEmpPairs(empProfiles) {
     const result = [];
 
@@ -157,7 +165,7 @@ function findEmpPairs(empProfiles) {
     return result;
 }
 
-function readFile(e, setState) {
+function readFile(e, setPairs, setOptions, setFilterred) {
     const file = e.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -167,8 +175,11 @@ function readFile(e, setState) {
             const statisticsMatrix = formatArrayToMatrix(statisticsArr);
             const inputData = matrixToArrayWithObjects(statisticsMatrix);
             const empProfiles = createEmpProfiles(inputData);
+            const options = createOptions(empProfiles);
+            setOptions(options);
             const pairs = findEmpPairs(empProfiles);
-            setState(pairs);
+            setPairs(pairs);
+            setFilterred(pairs);
         };
     }
 }
