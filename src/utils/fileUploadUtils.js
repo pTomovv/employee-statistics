@@ -5,11 +5,7 @@ function splitStringToArray(string) {
 function formatArrayToMatrix(array) {
     return array
         .filter((row) => row.trim().length !== 0)
-        .map((row) => row.split(',').map(trimString));
-}
-
-function trimString(string) {
-    return string.trim();
+        .map((row) => row.split(',').map((e) => e.trim()));
 }
 
 function matrixToArrayWithObjects(arr) {
@@ -45,14 +41,14 @@ function formatDate(date) {
 }
 
 function createEmpProfiles(data) {
-    const epmProfiles = [];
+    const empProfiles = [];
     data.forEach((row) => {
-        let index = epmProfiles.findIndex((emp) => {
+        let index = empProfiles.findIndex((emp) => {
             return emp.id === row.empId;
         });
 
         if (index === -1) {
-            epmProfiles.push({
+            empProfiles.push({
                 id: row.empId,
                 projects: [
                     {
@@ -63,14 +59,14 @@ function createEmpProfiles(data) {
                 ],
             });
         } else {
-            epmProfiles[index].projects.push({
+            empProfiles[index].projects.push({
                 id: row.projectId,
                 startDate: row.startDate,
                 endDate: row.endDate,
             });
         }
     });
-    return epmProfiles;
+    return empProfiles;
 }
 
 function createOptions(empProfiles) {
@@ -108,29 +104,23 @@ function findEmpPairs(empProfiles) {
                 }
 
                 for (let i = 0; i < commonProjectsIds.length; i++) {
-                    const startDate1 = new Date(
-                        employee1.projects.find(
-                            (e) => e.id === commonProjectsIds[i].id
-                        ).startDate
+                    let projectId = commonProjectsIds[i].id;
+
+                    const startDate1 = getDate(
+                        employee1,
+                        projectId,
+                        'startDate'
                     );
 
-                    const endDate1 = new Date(
-                        employee1.projects.find(
-                            (e) => e.id === commonProjectsIds[i].id
-                        ).endDate
+                    const endDate1 = getDate(employee1, projectId, 'endDate');
+
+                    const startDate2 = getDate(
+                        employee2,
+                        projectId,
+                        'startDate'
                     );
 
-                    const startDate2 = new Date(
-                        employee2.projects.find(
-                            (e) => e.id === commonProjectsIds[i].id
-                        ).startDate
-                    );
-
-                    const endDate2 = new Date(
-                        employee2.projects.find(
-                            (e) => e.id === commonProjectsIds[i].id
-                        ).endDate
-                    );
+                    const endDate2 = getDate(employee2, projectId, 'endDate');
 
                     const overlapStart = new Date();
                     overlapStart.setTime(
@@ -163,6 +153,13 @@ function findEmpPairs(empProfiles) {
     }
 
     return result;
+}
+
+function getDate(employee, project, dateType) {
+    let date = new Date(
+        employee.projects.find((e) => e.id === project)[dateType]
+    );
+    return date;
 }
 
 function readFile(e, setPairs, setOptions, setFilterred) {

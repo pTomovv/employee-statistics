@@ -15,10 +15,14 @@ const SelectMenu = ({ options, onChange }) => {
             <option value="all" className={styles.option}>
                 All Employees
             </option>
-            {options.map((e) => {
+            {options.map((option) => {
                 return (
-                    <option key={e} value={e} className={styles.option}>
-                        {e}
+                    <option
+                        key={option}
+                        value={option}
+                        className={styles.option}
+                    >
+                        {option}
                     </option>
                 );
             })}

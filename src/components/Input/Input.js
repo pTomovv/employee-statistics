@@ -1,4 +1,4 @@
-import './input.css';
+import './Input.css';
 
 const Input = ({ onChange }) => {
     return (
