@@ -1,9 +1,13 @@
+import { sortCommonProjects } from '../../utils/sortUtils';
 import styles from './MiniTable.module.css';
 
-const MiniTable = ({ info, onClose }) => {
+const MiniTable = ({ commonProjects, activePair, onClose }) => {
+    sortCommonProjects(commonProjects);
     return (
         <div className={styles.wrapper}>
-            <h3>Common Projects</h3>
+            <h3>
+                Common Projects of {activePair[0]} and {activePair[1]}
+            </h3>
             <table>
                 <thead>
                     <tr>
@@ -12,7 +16,7 @@ const MiniTable = ({ info, onClose }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {info.map((project, index) => {
+                    {commonProjects.map((project, index) => {
                         return (
                             <tr key={index} className={styles.row}>
                                 <td>{project.id}</td>

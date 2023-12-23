@@ -12,7 +12,8 @@ function App() {
     const [filterred, setFilterred] = useState(pairs);
     const [options, setOptions] = useState([]);
     const [active, setActive] = useState(null);
-    const [info, setInfo] = useState([]);
+    const [commonProjects, setcommonProjects] = useState([]);
+    const [activePair, setActivePair] = useState([]);
 
     function handleFileUpload(e) {
         readFile(e, setPairs, setOptions, setFilterred);
@@ -25,9 +26,10 @@ function App() {
         setActive(false);
     }
 
-    function rowExpand(info) {
+    function rowExpand(commonProjects, pair) {
         setActive(true);
-        setInfo(info);
+        setcommonProjects(commonProjects);
+        setActivePair(pair);
     }
     function handleClose() {
         setActive(false);
@@ -47,9 +49,15 @@ function App() {
             {pairs ? (
                 <Table data={filterred} onClick={rowExpand} />
             ) : (
-                <p>No Data</p>
+                <h1>No Data</h1>
             )}
-            {active ? <MiniTable info={info} onClose={handleClose} /> : null}
+            {active ? (
+                <MiniTable
+                    commonProjects={commonProjects}
+                    activePair={activePair}
+                    onClose={handleClose}
+                />
+            ) : null}
         </div>
     );
 }
