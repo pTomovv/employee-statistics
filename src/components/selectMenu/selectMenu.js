@@ -4,6 +4,7 @@ const SelectMenu = ({ options, onChange }) => {
     function handleSelectChange(e) {
         onChange(e.target.value);
     }
+
     return (
         <select
             name="employees"
